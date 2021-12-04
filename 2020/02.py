@@ -21,14 +21,13 @@ In the above example, 2 passwords are valid. The middle password, cdefg, is not;
 How many passwords are valid according to their policies?
 """
 f = open("02.txt", "r")
-passwords = [str(i) for i in f.readlines()]
+passwords = [str(i).strip() for i in f.readlines()]
 
 valid_passwords = 0
 
 for password in passwords:
     amount, letter, passwd = password.split(" ")
     min_amount, max_amount = map(int, amount.split("-"))
-    passwd = passwd.replace("\n", "")
     letter = letter.replace(":", "")
     letter_count = passwd.count(letter)
     if letter in passwd and letter_count >= min_amount and letter_count <= max_amount:
@@ -54,7 +53,6 @@ valid_passwords = 0
 for password in passwords:
     amount, letter, passwd = password.split(" ")
     pos1, pos2 = map(int, amount.split("-"))
-    passwd = passwd.replace("\n", "")
     letter = letter.replace(":", "")
     if (passwd[pos1 - 1] == letter and passwd[pos2 - 1] != letter) or (passwd[pos2 - 1] == letter and passwd[pos1 - 1] != letter):
         valid_passwords = valid_passwords + 1
